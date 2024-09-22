@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MenuV04", "MenuV04\MenuV04.csproj", "{FF9610BF-2187-48E2-B353-99050996701E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeData", "EmployeeData\EmployeeData.csproj", "{5343A1BC-EC30-4D7A-B167-C123A35CD305}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FF9610BF-2187-48E2-B353-99050996701E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF9610BF-2187-48E2-B353-99050996701E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF9610BF-2187-48E2-B353-99050996701E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5343A1BC-EC30-4D7A-B167-C123A35CD305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5343A1BC-EC30-4D7A-B167-C123A35CD305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5343A1BC-EC30-4D7A-B167-C123A35CD305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5343A1BC-EC30-4D7A-B167-C123A35CD305}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
