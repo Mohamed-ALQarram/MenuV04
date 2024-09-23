@@ -1,20 +1,23 @@
 ﻿using EmployeeData;
+using System.ComponentModel.Design;
 namespace MenuV04
 {
     internal class Program
     {
         static void Main(string[] args) 
         { 
-            string[] menu = { "  NEW  ","DISPLAY"," SORT "," EXIT " };
+            string[] menu = { "  NEW  ","DISPLAY","SEARCH"," SORT "," EXIT " };
             int highlight = 0;
             bool looping = true;
             int Xaxis = Console.WindowWidth / 2;
             int Yaxis = Console.WindowHeight / (menu.Length + 1);
-            int EmpNo = 3;
-            Human[] Employees = new Employee[0];
+            //int EmpNo = 0;
+            //Human[] Employees = new Employee[EmpNo];
+            List<Employee> Employees = new List<Employee>();
             do
             {
-                Console.Clear();
+            Console.Clear();
+            Console.CursorVisible = false;
                 for (int i = 0; i<menu.Length; i++)
                 {
                     if (i == highlight)
@@ -48,13 +51,12 @@ namespace MenuV04
                         switch (highlight)
                         {
                             case 0:
-                                Console.Write("Enter The Number of New Employees: ");
-                                int.TryParse(Console.ReadLine(), out EmpNo);
-                                Employees= new Employee[EmpNo];
+                                //Console.Write("Enter The Number of New Employees: ");
+                                //int.TryParse(Console.ReadLine(), out EmpNo);
+                                //Employees= new Employee[EmpNo];
                                 Console.ForegroundColor = ConsoleColor.Cyan;
-                                for (int i = 0; i<Employees.Length; i++)
-                                {
-                                    Console.WriteLine($"\nAdd Data for Employee{i+1}:\n" +
+                                Console.CursorVisible = true;
+                                Console.WriteLine($"\nAdd Data for Employee:\n" +
                                         $"***********************");
                                     Console.WriteLine("Enter Employee Name: ");
                                     string Name = Console.ReadLine() ?? "";
@@ -66,17 +68,23 @@ namespace MenuV04
                                     int.TryParse(Console.ReadLine(), out int age);
 
                                     Console.WriteLine("Enter Gender (Male || Female): ");
-                                    Gender gender = (Gender)Enum.Parse(typeof(Gender), Console.ReadLine() ?? "Male");
-
-                                    Employees[i] = new Employee(Name,salary, age, gender);
+                                    Gender gender;
+                                    
+                                    if(Enum.TryParse(typeof(Gender),Console.ReadLine(),out object? g))
+                                        gender = (Gender)g;
+                                    else
+                                        gender = 0;
+                                    Employees.Add(new Employee(Name,salary, age, gender));
                                     Console.Clear();   
-                                }
+                                
                                 break;
                             case 1:
-                                if (Employees.Length > 0)
+                                if (Employees.Count > 0)
                                 {
+                                    Console.CursorVisible = false;
                                     Console.ForegroundColor = ConsoleColor.Yellow;
-                                    Employees.print();
+                                    foreach(var emp in Employees)
+                                        emp.print();
                                 }
                                 else
                                 {
@@ -87,8 +95,39 @@ namespace MenuV04
                                 Console.ResetColor();
                                 break;
                             case 2:
-                                if (Employees.Length > 0)
+                                if(Employees.Count > 0)
                                 {
+                                    Console.CursorVisible = true;
+                                    Employee? emp;
+                                    Console.Write("Enter Employee ID or Name: ");
+                                    string input = Console.ReadLine() ?? "";
+
+                                    if(int.TryParse(input,out int ID))
+                                        emp=Employees.Find(emp => emp.ID == ID);//lambda expression
+                                    else
+                                        emp=Employees.Find(emp=> emp.Name == input);
+                                    if (emp != null)
+                                        emp.print();
+                                    else
+                                    {
+                                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                                        Console.WriteLine("Employee Not Found");
+                                        Console.ResetColor();
+                                    }
+                                    Console.ReadKey();
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Your List Is Empty.");
+                                    Console.ReadKey();
+                                    Console.ResetColor();
+                                }
+                                break;
+                            case 3:
+                                if (Employees.Count > 0)
+                                {
+                                    Console.CursorVisible = true;
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     Console.WriteLine("1.Sort By ID\n" +
                                         "2.Sort by Age\n" +
@@ -99,13 +138,17 @@ namespace MenuV04
                                     switch (ch)
                                     {
                                         case '1':
-                                            Array.Sort(Employees, new CompareByID());
+                                            //Array.Sort(Employees, new CompareByID
+                                            Employees.Sort(new CompareByID());
                                             break;
                                         case '2':
-                                            Array.Sort(Employees, new CompareByAge());
+                                            //    Array.Sort(Employees, new CompareByAge());
+                                            //Employees.OrderBy(emp => emp.Age);
+                                            Employees.Sort(new CompareByAge());
                                             break;
                                         case '3':
-                                            Array.Sort(Employees, new CompareByName());
+                                            //Array.Sort(Employees, new CompareByName());
+                                            Employees.Sort(new CompareByName());
                                             break;
                                         case '4':
                                             break;
@@ -124,7 +167,7 @@ namespace MenuV04
                                     Console.ResetColor();
                                 }
                                 break;
-                            case 3:
+                            case 4:
                                 looping = false;
                                 break;
                         }
@@ -135,6 +178,11 @@ namespace MenuV04
                 }
             }
             while (looping);
+            Console.ForegroundColor=ConsoleColor.Cyan;
+            Console.WriteLine("\nThank You for using our program");
+            Console.ForegroundColor=ConsoleColor.Black;
+            Console.CursorVisible = false;
+
         }
     }
 }

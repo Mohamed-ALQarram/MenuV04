@@ -4,14 +4,16 @@ namespace MenuV04
 {
     public static class Extension
     {
-        public static void print(this Human[] employees)
+        static int i;
+        static Extension() 
         {
-            for (int i = 0; i < employees.Length; i++) 
-            {
-                Console.WriteLine($"Employee{i + 1} Info's:\n" +
+        i=1;
+        }
+        public static void print(this Employee employees)
+        {
+                Console.WriteLine($"Employee{i++} Info's:\n" +
                                   $"***************** ");
-                Console.WriteLine(employees[i]);
-            }
+                Console.WriteLine(employees);
         }
     }
 }
