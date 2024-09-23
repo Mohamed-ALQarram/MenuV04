@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <Reference Include="EmployeeData">
-      <HintPath>..\..\Lab5\EmployeeData\bin\Debug\net8.0\EmployeeData.dll</HintPath>
+      <HintPath>..\EmployeeData\bin\Debug\net8.0\EmployeeData.dll</HintPath>
     </Reference>
   </ItemGroup>
 
