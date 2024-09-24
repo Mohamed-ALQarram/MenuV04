@@ -8,9 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="EmployeeData">
-      <HintPath>..\EmployeeData\bin\Debug\net8.0\EmployeeData.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\EmployeeData\EmployeeData.csproj" />
   </ItemGroup>
 
 </Project>

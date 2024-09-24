@@ -1,5 +1,4 @@
 ﻿using EmployeeData;
-using System.ComponentModel.Design;
 namespace MenuV04
 {
     internal class Program
@@ -132,7 +131,8 @@ namespace MenuV04
                                     Console.WriteLine("1.Sort By ID\n" +
                                         "2.Sort by Age\n" +
                                         "3.Sort By Name\n" +
-                                        "4.Exit\n");
+                                        "4.Sort By Salary\n" +
+                                        "5.Exit\n");
                                     Console.WriteLine("Enter Your Choice: ");
                                     char.TryParse(Console.ReadLine(), out char ch);
                                     switch (ch)
@@ -148,9 +148,65 @@ namespace MenuV04
                                             break;
                                         case '3':
                                             //Array.Sort(Employees, new CompareByName());
-                                            Employees.Sort(new CompareByName());
+                                            //Employees.Sort(new CompareByName());
+                                            Console.ForegroundColor= ConsoleColor.Cyan;
+
+                                            Console.WriteLine("\n1.Ascending Sort");
+                                            Console.WriteLine("2.Descending Sort");
+                                            Console.Write("Enter Your Choice: ");
+                                            char.TryParse(Console.ReadLine(), out ch);
+                                            switch (ch) 
+                                            {
+                                                case '1':
+                                                    Employees.Sort(delegate (Employee emp1, Employee emp2)
+                                                        {
+                                                            return emp1.Name.CompareTo(emp2.Name);
+                                                        });
+                                               
+                                            break;
+                                                case '2':
+                                                    Employees.Sort(delegate (Employee emp1, Employee emp2)
+                                                    {
+                                                        return emp2.Name.CompareTo(emp1.Name);
+                                                    });
+                                                    break;
+                                                default:
+                                                    Console.ForegroundColor=ConsoleColor.Red;
+                                                    Console.WriteLine("Enter Valied Number (1 or 2)");
+                                                    break;
+                                            }
                                             break;
                                         case '4':
+                                            Console.ForegroundColor = ConsoleColor.Cyan;
+                                            Console.WriteLine("\n1.Ascending Sort");
+                                            Console.WriteLine("2.Descending Sort");
+                                            Console.Write("\nEnter Your Choice: ");
+                                            char.TryParse(Console.ReadLine(), out ch);
+                                            switch (ch)
+                                            {
+                                                case '1':
+                                                    Employees.Sort(delegate (Employee emp1, Employee emp2)
+                                                    {
+                                                        return emp1.Salary.CompareTo(emp2.Salary);
+                                                    });
+                                                    break;
+                                                case '2':
+                                                    Employees.Sort(delegate (Employee emp1, Employee emp2)
+                                                    {
+                                                        return emp2.Salary.CompareTo(emp1.Salary);
+                                                    }); break;
+                                                default:
+                                                    Console.ForegroundColor = ConsoleColor.Red;
+                                                    Console.WriteLine("Enter Valied Number (1 or 2)");
+                                                    break;
+                                            }
+
+                                            Employees.Sort(delegate (Employee emp1, Employee emp2)
+                                            {
+                                                return emp1.Salary.CompareTo(emp2.Salary);
+                                            });
+                                            break;
+                                        case '5':
                                             break;
                                     }
                                     Console.Clear (); 
